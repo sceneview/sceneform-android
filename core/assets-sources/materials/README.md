@@ -1,9 +1,15 @@
-Download from **https://github.com/google/filament/releases** your OS specific binaries. The version must be the same as defined in the **libs.versions.toml**.
-Unpack the binaries and copy the **matc** executable into the material folder. After all materials are compiled against the latest version of filament **matc** must be deleted from the materials folder.
+The `.filamat` files in `src/main/res/raw` are compiled from the `.mat` sources in this folder.
+They must be compiled with the `matc` of the exact Filament version set as `filament_version` in
+`gradle/libs.versions.toml`, or the materials fail to load at runtime.
 
-Open a terminal and navigate to the material folder and execute for every **.mat** file the following command
+Download that version's binaries from **https://github.com/google/filament/releases**, then run
+from the repository root:
 
-`./matc -S -p mobile -o [outputname].filamat [inputname].mat`
+`MATC=/path/to/filament/bin/matc tools/generate_filamat.sh`
 
-More information to **matc** can be found here **https://google.github.io/filament/Materials.html** Section 5 **Compiling materials** 
+The script checks the `matc` version and compiles every material of `core` and `ux` with
+`--optimize-size --platform=mobile --api=opengl` (Sceneform's Engine runs on a shared EGL context,
+so OpenGL is the only backend it needs).
 
+More information on **matc**: **https://google.github.io/filament/Materials.html**, section 5
+**Compiling materials**.
