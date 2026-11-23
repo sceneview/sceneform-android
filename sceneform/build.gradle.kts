@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    //id("com.vanniktech.maven.publish")
+    id("com.vanniktech.maven.publish")
 }
 
 val GROUP: String by rootProject.extra
@@ -73,9 +73,3 @@ dependencies {
     api(project(":ux"))
 }
 
-/*
-mavenPublish {
-    releaseSigningEnabled =
-        project.hasProperty("signing.keyId") && project.hasProperty("signing.password")
-}
-*/

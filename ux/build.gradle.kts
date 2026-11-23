@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    //id("com.vanniktech.maven.publish")
+    id("com.vanniktech.maven.publish")
 }
 
 val groupProperty = project.findProperty("GROUP")?.toString()
@@ -73,9 +73,3 @@ dependencies {
     implementation(libs.androidx.appcompat)
 }
 
-/*
-mavenPublish {
-    releaseSigningEnabled =
-        project.hasProperty("signing.keyId") && project.hasProperty("signing.password")
-}
-*/

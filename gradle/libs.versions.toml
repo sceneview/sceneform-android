@@ -19,14 +19,14 @@ constraintlayout_version = "2.2.1"
 filament_version = "1.72.1"
 arcore_version = "1.57.0"
 fuel_version = "2.3.1"
+vanniktech_maven_publish_version = "0.34.0"
 
 material_version = '1.6.0'
-
-
 
 [libraries]
 
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradleVersion" }
+vanniktech-maven-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "vanniktech_maven_publish_version" }
 kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin_version" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin_version" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin_version" }
@@ -40,7 +40,6 @@ filament-gltfio = { module = "com.google.android.filament:gltfio-android", versi
 filament-utils = { module = "com.google.android.filament:filament-utils-android", version.ref = "filament_version" }
 
 arcore = { module = "com.google.ar:core", version.ref = "arcore_version" }
-
 
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core_ktx_version" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation_version" }

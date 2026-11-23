@@ -7,8 +7,8 @@ buildscript {
     dependencies {
         classpath libs.gradle
         classpath libs.kotlin.gradle.plugin
-        // Maven Central Publish
-        //classpath "com.vanniktech:gradle-maven-publish-plugin:0.18.0"
+        // Maven Central Publish (Central Portal)
+        classpath libs.vanniktech.maven.publish
     }
 }
 
@@ -18,21 +18,20 @@ allprojects {
         mavenLocal()
         mavenCentral()
     }
-    /*configurations.all {
-        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
-        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
-    }*/
 }
 
-/*
 allprojects {
     plugins.withId("com.vanniktech.maven.publish") {
-        mavenPublish {
-//            sonatypeHost = "S01"
+        mavenPublishing {
+            // Sonatype Central Portal (OSSRH was shut down in 2025).
+            publishToMavenCentral()
+            // Signing is mandatory on Maven Central; local builds publish unsigned.
+            if (project.hasProperty("signingInMemoryKey") || project.hasProperty("signing.keyId")) {
+                signAllPublications()
+            }
         }
     }
 }
-*/
 
 tasks.register('printProjectProperties') {
     project.properties.each { println "   $it" }
