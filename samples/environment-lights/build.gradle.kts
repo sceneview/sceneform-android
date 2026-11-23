@@ -61,10 +61,8 @@ dependencies {
 
     implementation(libs.google.android.material)
 
-    releaseImplementation(libs.thomasgorisse.sceneform)
-    // Or direct: releaseImplementation("com.gorisse.thomas.sceneform:sceneform:1.23.0")
 
-    debugApi(project(":sceneform"))
+    implementation(project(":sceneform"))
 
     // Ensures Kapt uses the correct Kotlin version for annotation processing
     kapt(libs.kotlin.compiler.embeddable)

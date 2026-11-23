@@ -55,8 +55,6 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.fragment.ktx)
 
-    releaseImplementation(libs.thomasgorisse.sceneform)
-    // Or direct: releaseImplementation("com.gorisse.thomas.sceneform:sceneform:1.23.0")
 
-    debugApi(project(":sceneform"))
+    implementation(project(":sceneform"))
 }

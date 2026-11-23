@@ -70,9 +70,6 @@ dependencies {
     implementation(libs.google.android.material) // Example alias
 
     // Sceneform
-    releaseImplementation(libs.thomasgorisse.sceneform) // Example alias
-    // Or define it directly if it's a one-off and not in the catalog
-    // releaseImplementation("com.gorisse.thomas.sceneform:sceneform:1.23.0")
 
-    debugApi(project(":sceneform")) // project() call needs parentheses
+    implementation(project(":sceneform"))
 }

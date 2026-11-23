@@ -54,7 +54,6 @@ dependencies {
     implementation(libs.androidx.appcompat) // From libs.versions.toml
     implementation(libs.androidx.fragment)   // From libs.versions.toml (note: not fragment-ktx for a Java sample)
 
-    releaseImplementation(libs.thomasgorisse.sceneform) // From libs.versions.toml
 
-    debugApi(project(":sceneform"))
+    implementation(project(":sceneform"))
 }

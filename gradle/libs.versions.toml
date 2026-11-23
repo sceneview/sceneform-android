@@ -22,7 +22,6 @@ fuel_version = "2.3.1"
 
 material_version = '1.6.0'
 
-thomasGorisseSceneform_version = "1.23.0"
 
 
 [libraries]
@@ -42,7 +41,6 @@ filament-utils = { module = "com.google.android.filament:filament-utils-android"
 
 arcore = { module = "com.google.ar:core", version.ref = "arcore_version" }
 
-thomasgorisse-sceneform = { module = "com.gorisse.thomas.sceneform:sceneform", version.ref = "thomasGorisseSceneform_version" }
 
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core_ktx_version" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation_version" }

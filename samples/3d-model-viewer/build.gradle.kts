@@ -55,12 +55,7 @@ dependencies {
     implementation(libs.androidx.appcompat) // Assuming alias in libs.versions.toml
     implementation(libs.androidx.fragment.ktx) // Assuming alias in libs.versions.toml
 
-    // For "com.gorisse.thomas.sceneform:sceneform:1.23.0"
-    // You can define this in libs.versions.toml as well
-    releaseImplementation(libs.thomasgorisse.sceneform) // Example alias
 
-    // Or define it directly if it's a one-off and not in the catalog
-    // releaseImplementation("com.gorisse.thomas.sceneform:sceneform:1.23.0")
 
-    debugApi(project(":sceneform")) // project() call needs parentheses
+    implementation(project(":sceneform"))
 }

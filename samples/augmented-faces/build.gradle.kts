@@ -56,9 +56,7 @@ dependencies {
     implementation(libs.androidx.fragment) // Ensure this is the correct one (ktx or non-ktx)
 
     // Using alias from libs.versions.toml
-    releaseImplementation(libs.thomasgorisse.sceneform)
     // Alternatively, if not using version catalog for this specific dependency:
-    // releaseImplementation("com.gorisse.thomas.sceneform:sceneform:1.23.0")
 
-    debugApi(project(":sceneform"))
+    implementation(project(":sceneform"))
 }
