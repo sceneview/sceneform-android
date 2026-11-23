@@ -364,6 +364,11 @@ public class Texture {
                       .levels(mipLevels)
                       .sampler(textureSampler)
                       .format(textureInternalFormat)
+                      // Filament 1.70+ asserts in generateMipmaps() without GEN_MIPMAPPABLE.
+                      .usage(mipLevels > 1
+                              ? com.google.android.filament.Texture.Usage.DEFAULT
+                                      | com.google.android.filament.Texture.Usage.GEN_MIPMAPPABLE
+                              : com.google.android.filament.Texture.Usage.DEFAULT)
                       .build(engine.getFilamentEngine());
 
       TextureHelper.setBitmap(engine.getFilamentEngine(), filamentTexture, 0, bitmap);
