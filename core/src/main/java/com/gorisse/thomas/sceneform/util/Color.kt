@@ -3,7 +3,6 @@ package com.gorisse.thomas.sceneform.util
 import com.google.android.filament.utils.pow
 import com.gorisse.thomas.sceneform.Color
 import com.gorisse.thomas.sceneform.colorOf
-import com.gorisse.thomas.sceneform.toFloatArray
 
 /**
  * @see FloatArray.toLinearSpace

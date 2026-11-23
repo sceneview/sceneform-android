@@ -1,0 +1,56 @@
+[versions]
+compileSdkVersion = "34"
+minimumSdkVersion = "24"
+targetSdkVersion = "34"
+
+gradleVersion = "8.11.1"
+
+kotlin_version = "2.0.21"
+kotlinx_coroutines_version = "1.8.1"
+lifecycle_runtime_ktx_version = "2.9.2"
+fragment_ktx_version = "1.8.8"
+core_ktx_version = "1.13.1"
+
+annotation_version = "1.9.1"
+appcompat_version = "1.7.1"
+fragment_version = "1.8.8"
+constraintlayout_version = "2.2.1"
+
+filament_version = "1.72.1"
+arcore_version = "1.57.0"
+fuel_version = "2.3.1"
+vanniktech_maven_publish_version = "0.34.0"
+
+material_version = '1.6.0'
+
+[libraries]
+
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradleVersion" }
+vanniktech-maven-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "vanniktech_maven_publish_version" }
+kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin_version" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin_version" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin_version" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx_coroutines_version" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx_coroutines_version" }
+kotlinx-coroutines-jdk8 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "kotlinx_coroutines_version" }
+
+filament-filamat-android = { module = "com.google.android.filament:filamat-android", version.ref = "filament_version" }
+filament-android = { module = "com.google.android.filament:filament-android", version.ref = "filament_version" }
+filament-gltfio = { module = "com.google.android.filament:gltfio-android", version.ref = "filament_version" }
+filament-utils = { module = "com.google.android.filament:filament-utils-android", version.ref = "filament_version" }
+
+arcore = { module = "com.google.ar:core", version.ref = "arcore_version" }
+
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core_ktx_version" }
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation_version" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle_runtime_ktx_version" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat_version" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment_ktx_version" }
+androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "fragment_version" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout_version" }
+
+google-android-material = { module = "com.google.android.material:material", version.ref = "material_version" }
+
+fuel-core = { module = "com.github.kittinunf.fuel:fuel", version.ref = "fuel_version" }
+fuel-android = { module = "com.github.kittinunf.fuel:fuel-android", version.ref = "fuel_version" }
+fuel-coroutines = { module = "com.github.kittinunf.fuel:fuel-coroutines", version.ref = "fuel_version" }

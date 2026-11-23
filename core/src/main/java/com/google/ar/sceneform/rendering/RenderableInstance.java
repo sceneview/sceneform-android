@@ -134,14 +134,17 @@ public class RenderableInstance implements AnimatableModel {
 
             Engine engine = EngineInstance.getEngine().getFilamentEngine();
 
-            AssetLoader loader =
-                    new AssetLoader(
-                            engine,
-                            RenderableInternalFilamentAssetData.getUberShaderLoader(),
-                            EntityManager.get());
+            // 2. Pass the MaterialProvider to the AssetLoader constructor
+            AssetLoader loader = new AssetLoader(
+                    engine,
+                    RenderableInternalFilamentAssetData.getUberShaderLoader(), // Use the MaterialProvider instance
+                    EntityManager.get());
 
-            FilamentAsset createdAsset = renderableData.isGltfBinary ? loader.createAssetFromBinary(renderableData.gltfByteBuffer)
-                    : loader.createAssetFromJson(renderableData.gltfByteBuffer);
+            FilamentAsset createdAsset = null;
+
+            if (renderableData.gltfByteBuffer != null) { // Check for null before using
+                createdAsset = loader.createAsset(renderableData.gltfByteBuffer);
+            }
 
             if (createdAsset == null) {
                 throw new IllegalStateException("Failed to load gltf");
@@ -173,7 +176,7 @@ public class RenderableInstance implements AnimatableModel {
                 }
             }
 
-            if(renderable.asyncLoadEnabled) {
+            if (renderable.asyncLoadEnabled) {
                 renderableData.resourceLoader.asyncBeginLoad(createdAsset);
             } else {
                 renderableData.resourceLoader.loadResources(createdAsset);
@@ -210,8 +213,7 @@ public class RenderableInstance implements AnimatableModel {
             setRenderPriority(renderable.getRenderPriority());
             setShadowCaster(renderable.isShadowCaster());
             setShadowReceiver(renderable.isShadowReceiver());
-
-            filamentAnimator = createdAsset != null ? createdAsset.getAnimator() : null;
+            filamentAnimator = createdAsset != null ? createdAsset.getInstance().getAnimator() : null;
             animations = new ArrayList<>();
             for (int i = 0; i < filamentAnimator.getAnimationCount(); i++) {
                 animations.add(new ModelAnimation(this, filamentAnimator.getAnimationName(i), i,
@@ -295,23 +297,23 @@ public class RenderableInstance implements AnimatableModel {
 
     /**
      * ### Changes whether or not frustum culling is on
-     *
+     * <p>
      * The view frustum is the region of space in the modeled world that may appear on the screen.
      * Viewing-frustum culling is the process of removing objects that lie completely outside the
      * viewing frustum from the rendering process.
      * In other words, `true` = your model won't be visible/rendered when not any part of its
      * bounding box is visible/inside the camera view.
-     *
+     * <p>
      * Rendering these object would be a waste of time since they are not directly visible.
      * To make culling fast, it is usually done using bounding box surrounding the objects rather
      * than the objects themselves.
      * Instead of sending all information to your GPU, you will sort visible and invisible elements
      * and render only visible elements.
      * Thanks to this technique, you will earn GPU compute time.
-     *
+     * <p>
      * Do not confuse frustum culling with backface culling. The latter is controlled via the
      * material
-     *
+     * <p>
      * true by default
      */
     public void setCulling(boolean isCulling) {
@@ -418,8 +420,8 @@ public class RenderableInstance implements AnimatableModel {
      * Returns the material bound to the specified name.
      */
     public Material getMaterial(String name) {
-        for(int i=0;i<materialBindings.size();i++) {
-            if(TextUtils.equals(materialNames.get(i), name)) {
+        for (int i = 0; i < materialBindings.size(); i++) {
+            if (TextUtils.equals(materialNames.get(i), name)) {
                 return materialBindings.get(i);
             }
         }

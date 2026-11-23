@@ -3,7 +3,6 @@ package com.gorisse.thomas.sceneform.environment
 import com.google.android.filament.IndirectLight
 import com.google.android.filament.Skybox
 import com.google.android.filament.utils.HDRLoader
-import com.google.android.filament.utils.KTXLoader
 import com.gorisse.thomas.sceneform.Filament
 import com.gorisse.thomas.sceneform.light.destroy
 import java.io.Closeable

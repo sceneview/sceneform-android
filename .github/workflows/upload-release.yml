@@ -1,6 +1,8 @@
-name: Upload release to Sonatype Staging Repository
+name: Upload release to the Maven Central Portal
 
-# Run this workflow when a tag is pushed
+# Run this workflow when a tag is pushed. The deployment is uploaded and validated,
+# then released by hand from https://central.sonatype.com/publishing/deployments
+# (or by running the "Publish Release To Maven Central" workflow instead).
 on:
   push:
     tags:
@@ -9,28 +11,26 @@ on:
 
 jobs:
   publish:
-    name: Release build and updload
+    name: Release build and upload
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
-          distribution: adopt
+          distribution: temurin
           java-version: 17
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Upload release to Sonatype Staging Repository
-        run: ./gradlew publishAllPublicationsToMavenCentralRepository --no-daemon --no-parallel
+      # Central Portal user token (not the old OSSRH credentials).
+      - name: Upload release to the Central Portal
+        run: ./gradlew publishToMavenCentral --no-daemon --no-parallel
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
-          #SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
-          #SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-          #SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}

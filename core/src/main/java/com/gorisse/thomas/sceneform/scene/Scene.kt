@@ -2,7 +2,6 @@ package com.gorisse.thomas.sceneform.scene
 
 import com.google.android.filament.Scene
 import com.google.android.filament.utils.HDRLoader
-import com.google.android.filament.utils.KTXLoader
 import com.gorisse.thomas.sceneform.environment.Environment
 
 /**

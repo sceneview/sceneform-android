@@ -545,7 +545,7 @@ public class CameraStream {
     /**
      * The DepthMode Enum is used to reflect the {@link Session} configuration
      * for the DepthMode to decide if the occlusion material should be set and if
-     * frame.acquireDepthImage() or frame.acquireRawDepthImage() should be called to get
+     * frame.acquireDepthImage16Bits() or frame.acquireRawDepthImage16Bits() should be called to get
      * the input data for the depth texture.
      */
     public enum DepthMode {
@@ -626,7 +626,7 @@ public class CameraStream {
             }
 
             if (cameraStreamRenderable != UNINITIALIZED_FILAMENT_RENDERABLE) {
-                scene.removeEntity(cameraStreamRenderable);
+                scene.remove(cameraStreamRenderable);
             }
 
             engine.destroyIndexBuffer(cameraIndexBuffer);

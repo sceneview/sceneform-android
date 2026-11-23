@@ -307,7 +307,7 @@ public class AugmentedFaceNode extends Node {
 //            Log.d(TAG, type + " " + Arrays.toString(position));
         }
         if(faceRegionNode != null && faceRegionNode.getRenderableInstance() != null) {
-            faceRegionNode.getRenderableInstance().getFilamentAsset().getAnimator().updateBoneMatrices();
+            faceRegionNode.getRenderableInstance().getFilamentAsset().getInstance().getAnimator().updateBoneMatrices();
         }
     }
 

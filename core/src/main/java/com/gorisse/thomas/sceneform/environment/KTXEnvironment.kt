@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LifecycleCoroutineScope
 import com.google.android.filament.IndirectLight
 import com.google.android.filament.Skybox
-import com.google.android.filament.utils.KTXLoader
+import com.google.android.filament.utils.KTX1Loader
 import com.gorisse.thomas.sceneform.Filament
 import com.gorisse.thomas.sceneform.util.fileBuffer
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +34,7 @@ class KTXEnvironment(
  * @return [Documentation][KTXLoader.createEnvironment]
  */
 @JvmOverloads
-suspend fun KTXLoader.loadEnvironment(
+suspend fun KTX1Loader.loadEnvironment(
     context: Context,
     iblKtxFileLocation: String,
     skyboxKtxFileLocation: String? = null
@@ -64,7 +64,7 @@ suspend fun KTXLoader.loadEnvironment(
  *
  */
 @JvmOverloads
-fun KTXLoader.loadEnvironmentAsync(
+fun KTX1Loader.loadEnvironmentAsync(
     context: Context,
     iblKtxFileLocation: String,
     skyboxKtxFileLocation: String? = null,
@@ -96,10 +96,10 @@ fun KTXLoader.loadEnvironmentAsync(
  * @see KTXLoader.createSkybox
  */
 @JvmOverloads
-fun KTXLoader.createEnvironment(
+fun KTX1Loader.createEnvironment(
     iblKtxBuffer: Buffer?,
     skyboxKtxBuffer: Buffer? = null
 ) = KTXEnvironment(
-    indirectLight = iblKtxBuffer?.let { createIndirectLight(Filament.engine, it) },
+    indirectLight = iblKtxBuffer?.let { createIndirectLight(Filament.engine, it).indirectLight },
     sphericalHarmonics = iblKtxBuffer?.rewind()?.let { getSphericalHarmonics(it) },
-    skybox = skyboxKtxBuffer?.let { createSkybox(Filament.engine, it) })
+    skybox = skyboxKtxBuffer?.let { createSkybox(Filament.engine, it).skybox })

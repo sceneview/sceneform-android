@@ -27,6 +27,10 @@ public class AnchorNode extends Node {
 
   private boolean wasTracking;
 
+  // Caching fields to avoid allocations.
+  private final Vector3 aPosition = new Vector3();
+  private final Quaternion aRotation = new Quaternion();
+
   private static final float SMOOTH_FACTOR = 12.0f;
 
   /** Create an AnchorNode with no anchor. */
@@ -188,13 +192,15 @@ public class AnchorNode extends Node {
     Quaternion desiredRotation = ArHelpers.extractRotationFromPose(pose);
 
     if (isSmoothed && !forceImmediate) {
-      Vector3 position = getWorldPosition();
       float lerpFactor = MathHelper.clamp(deltaSeconds * SMOOTH_FACTOR, 0, 1);
-      position.set(Vector3.lerp(position, desiredPosition, lerpFactor));
-      super.setWorldPosition(position);
 
-      Quaternion rotation = Quaternion.slerp(getWorldRotation(), desiredRotation, lerpFactor);
-      super.setWorldRotation(rotation);
+      getWorldPosition(aPosition);
+      aPosition.set(Vector3.lerp(aPosition, desiredPosition, lerpFactor));
+      super.setWorldPosition(aPosition);
+
+      getWorldRotation(aRotation);
+      aRotation.set(Quaternion.slerp(aRotation, desiredRotation, lerpFactor));
+      super.setWorldRotation(aRotation);
     } else {
       super.setWorldPosition(desiredPosition);
       super.setWorldRotation(desiredRotation);

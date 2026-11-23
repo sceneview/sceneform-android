@@ -1,10 +1,24 @@
-[![Maven Central](https://img.shields.io/maven-central/v/com.gorisse.thomas.sceneform/sceneform.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.gorisse.thomas.sceneform%22%20AND%20a:%22sceneform%22)
+[![Maven Central](https://img.shields.io/maven-central/v/com.gorisse.thomas.sceneform/sceneform.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/com.gorisse.thomas.sceneform/sceneform)
 [![Discord](https://img.shields.io/discord/893787194295222292?color=7389D8&label=Discord&logo=Discord&logoColor=ffffff&style=flat-square)](https://discord.gg/UbNDDBTNqb)
 
 Sceneform Maintained SDK for Android
 ====================================
 ---
-### ⚠️ **This framework isn't updated anymore. Consider using [Sceneview](https://github.com/SceneView/sceneview-android) in your projects instead.**
+> [!IMPORTANT]
+> **1.24.0 supports 16 KB page sizes.** From February 1, 2027, Google Play blocks updates of apps
+> targeting Android 15+ that ship native libraries aligned for 4 KB pages
+> ([Android guide](https://developer.android.com/guide/practices/page-sizes)). Sceneform 1.23 and older
+> bundle such libraries (Filament 1.21, ARCore 1.31). 1.24.0 ships Filament 1.72.1 and ARCore 1.57.0,
+> both 16 KB aligned, and keeps minSdk 24:
+>
+> ```gradle
+> implementation("com.gorisse.thomas.sceneform:sceneform:1.24.0")
+> ```
+>
+> See [1.24.0: 16 KB page sizes](#1240-16-kb-page-sizes) for what an app needs to upgrade.
+>
+> This is a maintenance release. Sceneform gets no new features; for new projects, use
+> [SceneView](https://github.com/sceneview/sceneview) (Jetpack Compose, ARCore, Filament).
 ---
 
 ### Sceneform Maintained is an ARCore Android SDK with Google Filament as 3D engine. This is the continuation of the [Archived Sceneform](https://developers.google.com/sceneform/develop)
@@ -24,7 +38,7 @@ Sceneform Maintained SDK for Android
 ### Sceneform maintained and successor:
 
 - Sceneform - Java Continuation : Here
-- SceneView - Kotlin Successor : [SceneView/sceneview-android](https://github.com/SceneView/sceneview-android)
+- SceneView - Kotlin Successor : [sceneview/sceneview](https://github.com/sceneview/sceneview)
 
 ### Differences with Google Sceneform (1.15.0, 1.16.0, 1.17.0 and 1.17.1)
 
@@ -53,10 +67,36 @@ This repository was originaly a fork of [Sceneform](https://github.com/google-ar
 *app/build.gradle*
 ```gradle
 dependencies {
-     implementation "com.gorisse.thomas.sceneform:sceneform:1.23.0"
+     implementation "com.gorisse.thomas.sceneform:sceneform:1.24.0"
 }
 ```
 [**more...**](https://sceneview.github.io/sceneform-android/dependencies)
+
+### 1.24.0: 16 KB page sizes
+
+Google Play requires apps targeting Android 15+ to support 16 KB memory page sizes. Sceneform
+compiles no native code of its own; 1.24.0 moves to Filament 1.72.1 and ARCore 1.57.0, whose
+64-bit native libraries are 16 KB aligned, and recompiles every material for that Filament
+version.
+
+To upgrade from 1.23:
+- Bump the dependency to `1.24.0`.
+- `compileSdk 34` or newer (1.23 needed 31). The AndroidX libraries Sceneform uses declare 34.
+- Build with JDK 17, and set Java and Kotlin targets to 17 (Filament 1.72.1 ships Java 17
+  bytecode). AGP 8 already requires JDK 17.
+- Kotlin 1.9 or newer if your app uses Kotlin (Sceneform and Filament carry Kotlin 2.0
+  metadata).
+- `minSdk 24`, unchanged.
+- Only if your code calls Filament directly: `KTXLoader` is now `KTX1Loader` (this includes
+  the `loadEnvironment` and `createEnvironment` extensions), `createIndirectLight` and
+  `createSkybox` return bundles (`.indirectLight`, `.skybox`), `UbershaderLoader` is now
+  `UbershaderProvider` (Sceneform keeps a deprecated `Filament.uberShaderLoader`),
+  `filamentAsset.animator` is now `filamentAsset.instance.animator`, and
+  `createAssetFromBinary`/`createAssetFromJson` are now `createAsset`.
+
+The Filament and ARCore upgrade builds on the work of
+[Robert Gregat](https://github.com/RGregat/sceneform-android), whose commits are kept in this
+repository's history.
 
 
 

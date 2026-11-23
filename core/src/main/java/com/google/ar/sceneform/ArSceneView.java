@@ -510,12 +510,12 @@ public class ArSceneView extends SceneView {
 
             if (cameraStream.getDepthOcclusionMode() == CameraStream.DepthOcclusionMode.DEPTH_OCCLUSION_ENABLED) {
                 if (cameraStream.getDepthMode() == CameraStream.DepthMode.DEPTH) {
-                    try (Image depthImage = currentFrame.acquireDepthImage()) {
+                    try (Image depthImage = currentFrame.acquireDepthImage16Bits()) {
                         cameraStream.recalculateOcclusion(depthImage);
                     } catch (NotYetAvailableException | DeadlineExceededException ignored) {
                     }
                 } else if (cameraStream.getDepthMode() == CameraStream.DepthMode.RAW_DEPTH) {
-                    try (Image depthImage = currentFrame.acquireRawDepthImage()) {
+                    try (Image depthImage = currentFrame.acquireRawDepthImage16Bits()) {
                         cameraStream.recalculateOcclusion(depthImage);
                     } catch (NotYetAvailableException | DeadlineExceededException ignored) {
                     }

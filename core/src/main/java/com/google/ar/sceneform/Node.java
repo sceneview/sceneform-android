@@ -662,6 +662,72 @@ public class Node extends NodeParent implements TransformProvider {
     }
 
     /**
+     * Gets the nodes position relative to its parent (local-space) without allocating a new Vector3.
+     *
+     * @param out a pre-allocated Vector3 to copy the position into.
+     * @see #setLocalPosition(Vector3)
+     */
+    public final void getLocalPosition(Vector3 out) {
+        Preconditions.checkNotNull(out, "Parameter \"out\" was null.");
+        out.set(localPosition);
+    }
+
+    /**
+     * Gets the nodes rotation relative to its parent (local-space) without allocating a new Quaternion.
+     *
+     * @param out a pre-allocated Quaternion to copy the rotation into.
+     * @see #setLocalRotation(Quaternion)
+     */
+    public final void getLocalRotation(Quaternion out) {
+        Preconditions.checkNotNull(out, "Parameter \"out\" was null.");
+        out.set(localRotation);
+    }
+
+    /**
+     * Gets the nodes scale relative to its parent (local-space) without allocating a new Vector3.
+     *
+     * @param out a pre-allocated Vector3 to copy the scale into.
+     * @see #setLocalScale(Vector3)
+     */
+    public final void getLocalScale(Vector3 out) {
+        Preconditions.checkNotNull(out, "Parameter \"out\" was null.");
+        out.set(localScale);
+    }
+
+    /**
+     * Get the nodes world-space position without allocating a new Vector3.
+     *
+     * @param out a pre-allocated Vector3 to copy the position into.
+     * @see #setWorldPosition(Vector3)
+     */
+    public final void getWorldPosition(Vector3 out) {
+        Preconditions.checkNotNull(out, "Parameter \"out\" was null.");
+        out.set(getWorldPositionInternal());
+    }
+
+    /**
+     * Gets the nodes world-space rotation without allocating a new Quaternion.
+     *
+     * @param out a pre-allocated Quaternion to copy the rotation into.
+     * @see #setWorldRotation(Quaternion)
+     */
+    public final void getWorldRotation(Quaternion out) {
+        Preconditions.checkNotNull(out, "Parameter \"out\" was null.");
+        out.set(getWorldRotationInternal());
+    }
+
+    /**
+     * Gets the nodes world-space scale without allocating a new Vector3.
+     *
+     * @param out a pre-allocated Vector3 to copy the scale into.
+     * @see #setWorldScale(Vector3)
+     */
+    public final void getWorldScale(Vector3 out) {
+        Preconditions.checkNotNull(out, "Parameter \"out\" was null.");
+        out.set(getWorldScaleInternal());
+    }
+
+    /**
      * Sets the position of this node relative to its parent (local-space). If {@link #isTopLevel()}
      * is true, then this is the same as {@link #setWorldPosition(Vector3)}.
      *
