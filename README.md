@@ -53,10 +53,36 @@ This repository was originaly a fork of [Sceneform](https://github.com/google-ar
 *app/build.gradle*
 ```gradle
 dependencies {
-     implementation "com.gorisse.thomas.sceneform:sceneform:1.23.0"
+     implementation "com.gorisse.thomas.sceneform:sceneform:1.24.0"
 }
 ```
 [**more...**](https://sceneview.github.io/sceneform-android/dependencies)
+
+### 1.24.0: 16 KB page sizes
+
+Google Play requires apps targeting Android 15+ to support 16 KB memory page sizes. Sceneform
+compiles no native code of its own; 1.24.0 moves to Filament 1.72.1 and ARCore 1.57.0, whose
+64-bit native libraries are 16 KB aligned, and recompiles every material for that Filament
+version.
+
+To upgrade from 1.23:
+- Bump the dependency to `1.24.0`.
+- `compileSdk 34` or newer (1.23 needed 31). The AndroidX libraries Sceneform uses declare 34.
+- Build with JDK 17, and set Java and Kotlin targets to 17 (Filament 1.72.1 ships Java 17
+  bytecode). AGP 8 already requires JDK 17.
+- Kotlin 1.9 or newer if your app uses Kotlin (Sceneform and Filament carry Kotlin 2.0
+  metadata).
+- `minSdk 24`, unchanged.
+- Only if your code calls Filament directly: `KTXLoader` is now `KTX1Loader` (this includes
+  the `loadEnvironment` and `createEnvironment` extensions), `createIndirectLight` and
+  `createSkybox` return bundles (`.indirectLight`, `.skybox`), `UbershaderLoader` is now
+  `UbershaderProvider` (Sceneform keeps a deprecated `Filament.uberShaderLoader`),
+  `filamentAsset.animator` is now `filamentAsset.instance.animator`, and
+  `createAssetFromBinary`/`createAssetFromJson` are now `createAsset`.
+
+The Filament and ARCore upgrade builds on the work of
+[Robert Gregat](https://github.com/RGregat/sceneform-android), whose commits are kept in this
+repository's history.
 
 
 
