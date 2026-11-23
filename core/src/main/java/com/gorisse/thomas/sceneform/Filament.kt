@@ -20,6 +20,13 @@ object Filament {
 
     val uberShaderProvider by lazy { UbershaderProvider(engine) }
 
+    @Deprecated(
+        "Filament renamed UbershaderLoader to UbershaderProvider",
+        ReplaceWith("uberShaderProvider")
+    )
+    val uberShaderLoader: UbershaderProvider
+        get() = uberShaderProvider
+
     @JvmStatic
     val assetLoader by lazy {
         AssetLoader(
@@ -37,8 +44,13 @@ object Filament {
     val iblPrefilter by lazy { IBLPrefilter(engine) }
 }
 
+// Kept for Java callers of FilamentKt.toFloatArray(); Kotlin resolves to the kotlin-math member.
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+fun Float4.toFloatArray() = this.let { (x, y, z, w) -> floatArrayOf(x, y, z, w) }
 fun FloatArray.toFloat4() = this.let { (x, y, z, w) -> Float4(x, y, z, w) }
 
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+fun Float3.toFloatArray() = this.let { (x, y, z) -> floatArrayOf(x, y, z) }
 fun FloatArray.toFloat3() = this.let { (x, y, z) -> Float3(x, y, z) }
 
 typealias Position = Float3

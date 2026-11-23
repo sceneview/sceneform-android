@@ -61,6 +61,11 @@ android {
     androidResources {
         noCompress.addAll(listOf("filamat", "ktx"))
     }
+
+    // 1.23 shipped a BuildConfig class in every module.
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
