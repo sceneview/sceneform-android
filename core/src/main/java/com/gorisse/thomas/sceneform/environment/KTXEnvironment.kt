@@ -100,6 +100,6 @@ fun KTX1Loader.createEnvironment(
     iblKtxBuffer: Buffer?,
     skyboxKtxBuffer: Buffer? = null
 ) = KTXEnvironment(
-    indirectLight = iblKtxBuffer?.let { createIndirectLight(Filament.engine, it) },
+    indirectLight = iblKtxBuffer?.let { createIndirectLight(Filament.engine, it).indirectLight },
     sphericalHarmonics = iblKtxBuffer?.rewind()?.let { getSphericalHarmonics(it) },
-    skybox = skyboxKtxBuffer?.let { createSkybox(Filament.engine, it) })
+    skybox = skyboxKtxBuffer?.let { createSkybox(Filament.engine, it).skybox })
