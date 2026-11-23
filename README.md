@@ -1,10 +1,24 @@
-[![Maven Central](https://img.shields.io/maven-central/v/com.gorisse.thomas.sceneform/sceneform.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.gorisse.thomas.sceneform%22%20AND%20a:%22sceneform%22)
+[![Maven Central](https://img.shields.io/maven-central/v/com.gorisse.thomas.sceneform/sceneform.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/com.gorisse.thomas.sceneform/sceneform)
 [![Discord](https://img.shields.io/discord/893787194295222292?color=7389D8&label=Discord&logo=Discord&logoColor=ffffff&style=flat-square)](https://discord.gg/UbNDDBTNqb)
 
 Sceneform Maintained SDK for Android
 ====================================
 ---
-### ⚠️ **This framework isn't updated anymore. Consider using [Sceneview](https://github.com/SceneView/sceneview-android) in your projects instead.**
+> [!IMPORTANT]
+> **1.24.0 supports 16 KB page sizes.** From February 1, 2027, Google Play blocks updates of apps
+> targeting Android 15+ that ship native libraries aligned for 4 KB pages
+> ([Android guide](https://developer.android.com/guide/practices/page-sizes)). Sceneform 1.23 and older
+> bundle such libraries (Filament 1.21, ARCore 1.31). 1.24.0 ships Filament 1.72.1 and ARCore 1.57.0,
+> both 16 KB aligned, and keeps minSdk 24:
+>
+> ```gradle
+> implementation("com.gorisse.thomas.sceneform:sceneform:1.24.0")
+> ```
+>
+> See [1.24.0: 16 KB page sizes](#1240-16-kb-page-sizes) for what an app needs to upgrade.
+>
+> This is a maintenance release. Sceneform gets no new features; for new projects, use
+> [SceneView](https://github.com/sceneview/sceneview) (Jetpack Compose, ARCore, Filament).
 ---
 
 ### Sceneform Maintained is an ARCore Android SDK with Google Filament as 3D engine. This is the continuation of the [Archived Sceneform](https://developers.google.com/sceneform/develop)
@@ -24,7 +38,7 @@ Sceneform Maintained SDK for Android
 ### Sceneform maintained and successor:
 
 - Sceneform - Java Continuation : Here
-- SceneView - Kotlin Successor : [SceneView/sceneview-android](https://github.com/SceneView/sceneview-android)
+- SceneView - Kotlin Successor : [sceneview/sceneview](https://github.com/sceneview/sceneview)
 
 ### Differences with Google Sceneform (1.15.0, 1.16.0, 1.17.0 and 1.17.1)
 
