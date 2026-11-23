@@ -1,6 +1,6 @@
 [versions]
 compileSdkVersion = "36"
-minimumSdkVersion = "28"
+minimumSdkVersion = "24"
 targetSdkVersion = "36"
 
 gradleVersion = "8.11.1"
